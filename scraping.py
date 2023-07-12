@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 
 
-def scrape_url(url):
+def scrap_url():
     url = input("Please enter the URL: ")
     # Send a GET request to the URL
     response = requests.get(url)
@@ -18,4 +18,4 @@ def scrape_url(url):
 
 if __name__ == '__main__':
     url = ''
-    print(scrape_url(url))
+    print(scrap_url())
