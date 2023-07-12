@@ -2,8 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 
 
-def scrap_url():
-    url = input("Please enter the URL: ")
+def scrap_url(url):
     # Send a GET request to the URL
     response = requests.get(url)
 

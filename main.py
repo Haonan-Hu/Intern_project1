@@ -1,31 +1,44 @@
 from pytrends.request import TrendReq
 from src.YAKE import rertive_keywords
-import pandas as pd
-import time
 from tabulate import tabulate
 from IPython.display import display
+import pandas as pd
+import time
+import numpy as np
+import pdfkit
+
+def make_request(url):
+    # Make your request to the Google API
+    pytrends = TrendReq(hl='en-US', tz=360)
+    keywords = rertive_keywords(url)
+    pytrends.build_payload(keywords, cat=0, timeframe='today 5-y', geo='', gprop='')
+    # attempt to request data until successful
+    response = pytrends.interest_over_time()
+    if response is None:
+        # Sleep for the amount of seconds specified in the Retry-After header
+        retry_after = int(response.headers.get('Retry-After'))
+        time.sleep(retry_after)
+        # Retry the request
+        return make_request()
+    # Handle other response statuses here
+    else:
+        # Process the response
+        return response
 
 
 def trends():
-    pytrends = TrendReq(hl='en-US', tz=360)
-
-    keywords = rertive_keywords()
-    pytrends.build_payload(keywords, cat=0, timeframe='today 5-y', geo='', gprop='')
-    for i in range(3):
-        # Send the request
-        trends_data = pytrends.interest_over_time()
-        # Add a delay between requests
-        time.sleep(1)
-
+    # Get the URL from the user
+    url = input("Please enter the URL: ")
+    # Make the request
+    trends_data = make_request(url)
     # print(tabulate(trends_data, headers='keys', tablefmt='psql'))
 
-    # Apply styling to the DataFrame
-    df1 = trends_data.style.set_table_styles([dict(selector='th', props=[('text-align', 'center')])])
-    df2 = df1.set_properties(**{'text-align': 'center'})
-    return df2
+    return trends_data
 
 
 if __name__ == '__main__':
     result = trends()
-    # Render and display the styled DataFrame directly
-    display(result)
+    # Convert DataFrame to HTML table
+    html_table = result.to_html()
+    # Convert HTML table to PDF
+    pdfkit.from_string(html_table, 'output.pdf')

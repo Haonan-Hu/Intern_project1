@@ -8,8 +8,8 @@ import yake
 import src.scraping as scraping
 
 
-def rertive_keywords():
-    text = scraping.scrap_url()
+def rertive_keywords(url):
+    text = scraping.scrap_url(url)
 
     kw_extractor = yake.KeywordExtractor()
     keywords = kw_extractor.extract_keywords(text)
