@@ -30,8 +30,8 @@ def rertive_keywords(url):
                                                 features=None)
     keywords = custom_kw_extractor.extract_keywords(text)
 
-    for kw in keywords:
-        print(kw)
+    # for kw in keywords:
+    #     print(kw)
 
     return [k[0] for k in keywords[:5]]
 
