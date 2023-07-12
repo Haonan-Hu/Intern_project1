@@ -5,7 +5,7 @@
 # Functionality: Testing YAKE algorithm
 
 import yake
-import scraping
+import src.scraping as scraping
 
 
 def rertive_keywords():

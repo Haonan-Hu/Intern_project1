@@ -1,5 +1,5 @@
 from pytrends.request import TrendReq
-from YAKE import rertive_keywords
+from src.YAKE import rertive_keywords
 import pandas as pd
 import time
 from tabulate import tabulate
