@@ -34,7 +34,3 @@ def rertive_keywords(url):
         print(kw)
 
     return [k[0] for k in keywords[:5]]
-
-
-if __name__ == '__main__':
-    keywords = rertive_keywords()

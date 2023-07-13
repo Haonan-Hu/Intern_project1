@@ -13,8 +13,3 @@ def scrap_url(url):
     soup = BeautifulSoup(content, 'html.parser')
 
     return soup.get_text()
-
-
-if __name__ == '__main__':
-    url = ''
-    print(scrap_url())
