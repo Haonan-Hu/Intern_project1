@@ -1,11 +1,6 @@
 from pytrends.request import TrendReq
 from pytrends.exceptions import ResponseError
 from src.YAKE import rertive_keywords
-from tabulate import tabulate
-from IPython.display import display
-import pandas as pd
-import time
-import numpy as np
 import pdfkit
 
 def Interest_over_time(url):
